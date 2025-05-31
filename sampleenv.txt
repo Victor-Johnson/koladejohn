@@ -5,3 +5,4 @@ DATABASE_NAME = testdb
 DATABASE_USER = victorjohnson 
 DB_MODEL = postgresql+asyncpg
 DATABASE_URL=postgresql+asyncpg://victor:your_secure_password@localhost/koladeportfolio
+AWS_BUCKET = xxxxxx

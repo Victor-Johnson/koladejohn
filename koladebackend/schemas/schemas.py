@@ -55,6 +55,8 @@ class BlogTag(str, Enum):
     open_source = "Open Source in ML"
     model_deployment = "Model Deployment"
 
+class 
+
 class applicationdomain(BaseModel,Enum):
     pass
 
@@ -63,7 +65,7 @@ class Blogpost(BaseModel):
     title : str 
     slug : str 
     content : str 
-    tags : Optional[list[str]]
+    tags : Optional[list[BlogTag]]
     domain : Optional[list[str]]
     category : Optional[str]
     cover_images : Optional[str]
