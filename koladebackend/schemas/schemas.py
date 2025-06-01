@@ -20,6 +20,13 @@ class User(BaseModel):
     email: str
     hashed_password: str
 
+class product(BaseModel):
+    id : int 
+    name : str 
+    images : str 
+    link_1 : str
+    link_2 : str 
+
 class ContactRequest(BaseModel):
     name : str 
     email : Emailstr

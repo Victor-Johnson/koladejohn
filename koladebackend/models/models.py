@@ -16,6 +16,17 @@ class User(Base):
     projects = relationship('Project', back_populates='owner')
     blogs = relationship('BlogPost', back_populates='author')
 
+class Products(Base):
+
+    __tablename__ = 'products'
+
+    id = Column(Integer,primary_key=True)
+    name = Column(String,nullable=False)
+    images = Column(String)
+    link_1 = Column(String)
+    link_2 = Column(String)
+
+    
 class BlogPost(Base):
     __tablename__ = 'blog_posts'
 
@@ -32,8 +43,6 @@ class BlogPost(Base):
     author_id = Column(Integer, ForeignKey('users.id'))
     author = relationship('User', back_populates='blogs')
 
-    tags = relationship('BlogTagEnum', secondary=blog_tags, viewonly=True)
-    domains = relationship('str', secondary=blog_domains, viewonly=True)
 
 # Model to save your projects
 
