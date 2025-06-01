@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
 import schemas, models
-from dependencies import get_current_user, require_admin
+from utils.rbacdepend import get_current_user, require_admin
 
 router = APIRouter(prefix="/blogs", tags=["Blogs"])
 

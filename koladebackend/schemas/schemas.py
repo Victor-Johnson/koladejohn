@@ -62,7 +62,7 @@ class BlogTag(str, Enum):
     open_source = "Open Source in ML"
     model_deployment = "Model Deployment"
 
-class 
+
 
 class applicationdomain(BaseModel,Enum):
     pass

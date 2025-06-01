@@ -1,10 +1,10 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from jose import JWTError , jwt 
-from config import BaseSettings
+from settings import settings
 
-SERECT_KEY = BaseSettings
-ALGORTIHM = BaseSettings
+SERECT_KEY = settings.serect_key
+ALGORTIHM = settings.algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES = 3600
 
 pwd_context = CryptContext(schemes=["bcrypt"],deprecated="auto")
