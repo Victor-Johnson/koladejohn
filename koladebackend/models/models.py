@@ -11,10 +11,7 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
-    role = Column(String,nullable=False)
-    # Relationships
-    projects = relationship('Project', back_populates='owner')
-    blogs = relationship('BlogPost', back_populates='author')
+    role = Column(String,nullable=False,default="user")
 
 class Products(Base):
 
@@ -22,11 +19,12 @@ class Products(Base):
 
     id = Column(Integer,primary_key=True)
     name = Column(String,nullable=False)
+    status = Column(String,nullable=False)
     images = Column(String)
     link_1 = Column(String)
     link_2 = Column(String)
 
-    
+
 class BlogPost(Base):
     __tablename__ = 'blog_posts'
 
