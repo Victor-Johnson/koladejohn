@@ -72,7 +72,6 @@ class BlogTag(str, Enum):
 
 # Blog Post Model
 class Blogpost(BaseModel):
-    id: int
     title: str
     slug: str
     content: str
@@ -80,6 +79,18 @@ class Blogpost(BaseModel):
     domain: Optional[List[str]]
     category: Optional[str]
     cover_images: Optional[str]
+    Additional_link: Optional[List[str]]
+
+class BlogCreate(Blogpost):
+    pass
+
+class BlogUpdate(Blogpost):
+    pass
+
+class Blogpost(Blogpost):
+    id : int 
     created_at: datetime
     updated_at: datetime
-    Additional_link: Optional[List[str]]
+
+    class Config:
+        orm_mode = True 
