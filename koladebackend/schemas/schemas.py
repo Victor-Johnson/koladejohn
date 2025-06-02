@@ -1,42 +1,49 @@
 from fastapi import FastAPI
-from pydantic import BaseModel ,Emailstr,datetime ,Optional
-from enum import Enum 
+from pydantic import BaseModel, EmailStr
+from typing import Optional, List
+from datetime import datetime
+from enum import Enum
 
 app = FastAPI()
 
-class projects(BaseModel):
-    id : int 
-    title : str 
-    description : str 
-    tech_stack : str 
-    github_link : Optional[str]
-    live_link : Optional[str]
-    image : Optional[str]
-    created_at : datetime
+# Project model
+class Project(BaseModel):
+    id: int
+    title: str
+    description: str
+    tech_stack: str
+    github_link: Optional[str]
+    live_link: Optional[str]
+    image: Optional[str]
+    created_at: datetime
 
+# User model
 class User(BaseModel):
     id: int
     username: str
     email: str
     hashed_password: str
 
-class product(BaseModel):
-    id : int 
-    name : str 
-    images : str 
-    link_1 : str
-    link_2 : str 
+# Product model
+class Product(BaseModel):
+    id: int
+    name: str
+    images: str
+    link_1: str
+    link_2: str
 
+# Contact Request
 class ContactRequest(BaseModel):
-    name : str 
-    email : Emailstr
-    message : str 
+    name: str
+    email: EmailStr
+    message: str
 
-class UserRole(BaseModel,Enum):
+# Roles
+class UserRole(str, Enum):
     admin = "admin"
     user = "user"
 
-
+# Project Tags
 class ProjectTag(str, Enum):
     python = "Python"
     pandas = "Pandas"
@@ -54,6 +61,7 @@ class ProjectTag(str, Enum):
     maclearn = "Machine Learning"
     life = "Life & Fun"
 
+# Blog Tags
 class BlogTag(str, Enum):
     ml_theory = "ML Theory"
     data_visualization = "Data Visualization"
@@ -62,24 +70,16 @@ class BlogTag(str, Enum):
     open_source = "Open Source in ML"
     model_deployment = "Model Deployment"
 
-
-
-class applicationdomain(BaseModel,Enum):
-    pass
-
+# Blog Post Model
 class Blogpost(BaseModel):
-    id : int 
-    title : str 
-    slug : str 
-    content : str 
-    tags : Optional[list[BlogTag]]
-    domain : Optional[list[str]]
-    category : Optional[str]
-    cover_images : Optional[str]
-    created_at : datetime 
-    updated_at : datetime 
-    Additional_link : Optional[list[str]]
-
-
-
-
+    id: int
+    title: str
+    slug: str
+    content: str
+    tags: Optional[List[BlogTag]]
+    domain: Optional[List[str]]
+    category: Optional[str]
+    cover_images: Optional[str]
+    created_at: datetime
+    updated_at: datetime
+    Additional_link: Optional[List[str]]

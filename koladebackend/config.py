@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
 class BaseConfig(BaseSettings):
@@ -15,17 +15,16 @@ class BaseConfig(BaseSettings):
     def database_url(self):
         return f"{self.db_model}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
 
-    class Config:
-        env_file = ".env"
+    model_config = SettingsConfigDict(env_file=".env") 
 
 
-class Development(BaseConfig):
+class DevelopmentConfig(BaseConfig):
     env: str = "development"
 
 
-class Production(BaseConfig):
+class ProductionConfig(BaseConfig):
     env: str = "production"
 
 
-class Testing(BaseConfig):
+class TestingConfig(BaseConfig):
     env: str = "testing"

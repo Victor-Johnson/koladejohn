@@ -2,10 +2,15 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
-from auth import SECRET_KEY, ALGORITHM
+#from auth import SECRET_KEY, ALGORITHM
 from sqlalchemy.orm import Session
+from settings import settings
 from database import get_db
 import models
+
+SECRET_KEY = settings.secret_key
+ALGORITHM = settings.algorithm
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
 
@@ -28,5 +33,6 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
 def require_admin(current_user: models.User = Depends(get_current_user)):
     if current_user.role != "admin":
-        raise HTTPException(status_code=403, detail="Admin only")
+        raise HTTPException(status_code=403, detail="Admin only",
+                            message = "This is strictly an admin function 🤫")
     return current_user

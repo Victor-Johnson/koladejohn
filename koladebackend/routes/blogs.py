@@ -1,12 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
-import schemas, models
+#import schemas
+from .. import schemas
+import models
 from utils.rbacdepend import get_current_user, require_admin
 
 router = APIRouter(prefix="/blogs", tags=["Blogs"])
 
-@router.post("/", response_model=schemas.BlogOut)
+@router.post("/", response_model=schemas.Blogpost)
 def create_blog(blog: schemas.BlogCreate, db: Session = Depends(get_db), _: models.User = Depends(require_admin)):
     new_blog = models.Blog(**blog.dict())
     db.add(new_blog)
@@ -14,11 +16,11 @@ def create_blog(blog: schemas.BlogCreate, db: Session = Depends(get_db), _: mode
     db.refresh(new_blog)
     return new_blog
 
-@router.get("/", response_model=list[schemas.BlogOut])
+@router.get("/", response_model=list[schemas.Blogpost])
 def get_blogs(db: Session = Depends(get_db)):
     return db.query(models.Blog).all()
 
-@router.put("/{blog_id}", response_model=schemas.BlogOut)
+@router.put("/{blog_id}", response_model=schemas.Blogpost)
 def update_blog(blog_id: int, blog: schemas.BlogCreate, db: Session = Depends(get_db), _: models.User = Depends(require_admin)):
     db_blog = db.query(models.Blog).filter(models.Blog.id == blog_id).first()
     if not db_blog:
